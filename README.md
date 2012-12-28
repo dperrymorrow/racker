@@ -6,3 +6,5 @@
 rackup config.ru
 ````
 
+small rack based ruby app framework
+
