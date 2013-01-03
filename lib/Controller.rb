@@ -8,21 +8,24 @@ class Controller
     @params = params
   end
 
-  def render(view_file="#{@params[:controller]}/#{@params[:action]}", type="text/html", status=200)
+  def render(params={})
+    params.with_defaults!(:template => "#{@params[:controller]}/#{@params[:action]}", :type => "text/html", :status => 200)
+    params[:content] = self.template(params[:template]) unless params[:content]
+
     [
-      status,
+      params[:status],
       {
         "Cache-Control" => "no-cache, no-store, max-age=0, must-revalidate",
         "Pragma"        => "no-cache",
         "Expires"       => "Fri, 29 Aug 1997 02:14:00 EST",
-        "Content-Type"  => type
+        "Content-Type"  => params[:type]
       },
-      [template(view_file)]
+      [params[:content]]
     ]
   end
 
   def render_404
-    self.render(self.template('404'), "text/html", 404)
+    self.render(:template => '404', :status => 404)
   end
 
   def template(file)

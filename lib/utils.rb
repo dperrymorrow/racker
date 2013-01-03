@@ -1,13 +1,5 @@
-module Utils
-  def symbolize_keys(hash)
-    hash.keys.each do |key|
-      hash[(key.to_sym rescue key) || key] = hash.delete(key)
-    end
-    hash
-  end
-end
-
 require "yaml"
+
 module Utils
   def symbolize_keys(hash)
     hash.keys.each do |key|
@@ -36,6 +28,22 @@ module Utils
       font-weight:normal;">#{trace}</pre>
     eos
   end
-  
 end
+
+class String
+  def is_i?
+     !!(self =~ /^[-+]?[0-9]+$/)
+  end
+end
+
+class Hash
+  def with_defaults(defaults)
+    self.merge(defaults) { |key, old, new| old.nil? ? new : old } 
+  end
+
+  def with_defaults!(defaults)
+    self.merge!(defaults) { |key, old, new| old.nil? ? new : old }
+  end
+end
+
 
