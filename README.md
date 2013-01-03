@@ -1,6 +1,6 @@
 # A Rack App
 
-## from terminal 
+## to start server in non development mode
 
 ````bash
 rackup config.ru

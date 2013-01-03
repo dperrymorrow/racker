@@ -14,10 +14,19 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    daemons (1.1.9)
+    eventmachine (1.0.0)
     i18n (0.6.1)
     multi_json (1.5.0)
     mysql2 (0.3.11)
     rack (1.4.1)
+    rack-nocache (0.1.0)
+    shotgun (0.9)
+      rack (>= 1.0)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     tzinfo (0.3.35)
 
 PLATFORMS
@@ -27,3 +36,6 @@ DEPENDENCIES
   activerecord
   mysql2
   rack
+  rack-nocache
+  shotgun
+  thin
