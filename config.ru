@@ -29,6 +29,9 @@ app = Rack::Builder.new do
   use Rack::Reloader
   use Rack::Nocache
   run Rack::App.new
+  use Rack::Static, 
+    :urls => ["/images", "/js", "/css", "/favicon.ico"],
+    :root => "public"
 end.to_app
 
 Rack::Handler::Thin.run app, :Port => 4000
