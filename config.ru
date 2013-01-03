@@ -1,8 +1,8 @@
 ROOT_PATH = File.dirname(__FILE__)
 
 require "rubygems"
-require "#{ROOT_PATH}/lib/Router.rb"
 require "#{ROOT_PATH}/lib/Utils.rb"
+require "#{ROOT_PATH}/lib/Router.rb"
 require "#{ROOT_PATH}/lib/Model.rb"
 require "#{ROOT_PATH}/lib/Controller.rb"
 
