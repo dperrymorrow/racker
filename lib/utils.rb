@@ -19,15 +19,15 @@ module Utils
   def debug(obj)
     YAML::ENGINE.yamler = 'syck'
     trace = YAML::dump(obj)
-    trace.gsub!(/\n(.*):\n/, "\n"+'<span style="color:#75879d;">\1 </span>'+"\n")
-    trace.gsub!(/\n(.*):\s/, "\n"+'<span style="color:#f9ee98;">\1 </span>')
+    trace.gsub!(/\n(.*):\n/, "\n"+'<span style="color:#333;">\1 </span>'+"\n")
+    trace.gsub!(/\n(.*):\s/, "\n"+'<span style="color:#333;">\1 </span>')
     <<-eos
       <pre style="text-align:left;
       font-family:Monaco,Sans;
       font-weight:normal;
-      background-color:#1a1a1a;
+      background-color:#efefef;
       padding:15px;
-      color:#cf6a47;
+      color:#777;
       font-size:13px;
       white-space:pre;
       display:block;

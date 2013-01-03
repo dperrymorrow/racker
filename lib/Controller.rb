@@ -6,9 +6,7 @@ class Controller
     @params = params
   end
 
-
-
-  def render(content="", type="text/html", status=200)
+  def render(content=debug(@params), type="text/html", status=200)
     [
       status,
       {
@@ -17,7 +15,11 @@ class Controller
         "Expires"       => "Fri, 29 Aug 1997 02:14:00 EST",
         "Content-Type"  => type
       },
-      [debug(@params)]
+      [content]
     ]
+  end
+
+  def render_404
+    self.render("<h1>404 Not Found!</h1>#{debug(@params)}", "text/html", 404)
   end
 end

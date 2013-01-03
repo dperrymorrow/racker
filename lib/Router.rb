@@ -6,6 +6,7 @@ class Router
     @request_method = @request.request_method
     self.parse_params()
     self.parse_uri()
+    self.vars()
   end
 
   def parse_params
@@ -28,11 +29,11 @@ class Router
   end
 
   def parse_controller
-    @segments[0]
+    @segments[0].to_s
   end
 
   def vars
-    @params.merge(
+    @params.merge!(
       :segments   => @segments, 
       :controller => self.parse_controller, 
       :action     => self.parse_action,
@@ -42,7 +43,14 @@ class Router
   end
 
   def render
-    Controller.new(self.vars).render
+    file = "#{ROOT_PATH}/app/controllers/#{@params[:controller].capitalize}Controller.rb"
+    if File.exists?(file)
+      require file
+      @controller = Object.const_get(@params[:controller].capitalize + "Controller").new(self.vars)
+      @controller.respond_to?(@params[:action]) ? @controller.send(@params[:action]) : @controller.render_404
+    else
+      Controller.new(self.vars).render_404
+    end
   end
 end
 
